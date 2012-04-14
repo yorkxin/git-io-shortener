@@ -51,3 +51,10 @@ var GitIO = new (function() {
 chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
   GitIO.invoke(request.command, request.params, sendResponse);
 });
+
+// show Page Action icon when we're on GitHub
+chrome.tabs.onUpdated.addListener(function(tab_id, change_info, tab) {
+  if (tab.url.match('^https:\/\/github.com')) {
+    chrome.pageAction.show(tab_id);
+  }
+});
