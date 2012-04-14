@@ -2,6 +2,16 @@ var GitIO = new (function() {
 
   var API_ENDPOINT  = "http://git.io/";
 
+  this.invoke = function(command, params, response_callback) {
+    switch (command) {
+      case "generate":
+        requestForShortenUrl(params.url, function(data) {
+          response_callback(data);
+        });
+        break;
+    }
+  };
+
   var requestForShortenUrl = function(url, callback) {
     var xhr = new XMLHttpRequest();
     var form_data = new FormData();
