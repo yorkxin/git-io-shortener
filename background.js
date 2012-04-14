@@ -46,3 +46,8 @@ var GitIO = new (function() {
     xhr.send(form_data);
   };
 })();
+
+// register service for this extension
+chrome.extension.onRequest.addListener(function (request, sender, sendResponse) {
+  GitIO.invoke(request.command, request.params, sendResponse);
+});
