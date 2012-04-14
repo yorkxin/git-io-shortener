@@ -6,5 +6,10 @@
   "permissions": [
     "tabs",
     "http://git.io/"
-  ]
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
 }
