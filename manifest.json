@@ -7,6 +7,11 @@
     "tabs",
     "http://git.io/"
   ],
+  "page_action": {
+    "default_icon": "icon-32.png",
+    "default_title": "Generate Git.io Short URL",
+    "default_popup": "popup.html"
+  },
   "background": {
     "scripts": [
       "background.js"
