@@ -34,3 +34,7 @@ var GitIOPopup = new (function() {
     message_container.innerText = message;
   };
 })();
+
+document.addEventListener("DOMContentLoaded", function () {
+  GitIOPopup.getShortenedUrl();
+});
