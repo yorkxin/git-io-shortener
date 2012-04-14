@@ -1,0 +1,2 @@
+var GitIO = new (function() {
+})();
