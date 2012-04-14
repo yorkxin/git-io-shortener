@@ -4,6 +4,7 @@
   "manifest_version": 2,
   "description": "Git.io URL Shortener makes it easy to shorten any URL on GitHub.com with its official service, Git.IO.",
   "permissions": [
+    "tabs",
     "http://git.io/"
   ]
 }
