@@ -19,6 +19,26 @@ It's welcomed!  You may help me by:
 * making a fancy new icon, or
 * fixing bugs (see Issues section)
 
+## Changelog
+
+### v0.4.0:
+
+- Deal with error status from git.io
+- Click-to-copy procedure refactored
+
+### v0.3.0:
+
+- Support for raw.github.com, developer.github.com and develop.github.com
+
+### v0.2.0:
+
+- Support for gist.github.com
+
+### v0.1.0:
+
+- Shorten github.com with git.io service
+- Click the result text box to copy to clipboard
+
 ## License: Know your rights
 
 This application, including the source code and images, is released under the following software license (feel free to make it available on other browsers with my code):
