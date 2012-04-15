@@ -36,14 +36,10 @@ var GitIOPopup = new (function() {
   };
 
   var copyResultToClipboard = function() {
-    if (getTextField() === "") {
-      setMessage("Not yet generated...");
-    } else {
-      text_field.select();
-      document.execCommand('Copy');
+    text_field.select();
+    document.execCommand('Copy');
 
-      setMessage("Copied to clipboard.");
-    }
+    setMessage("Copied to clipboard.");
   };
 
   var getTextField = function() {
