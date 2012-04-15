@@ -18,27 +18,25 @@ var GitIO = new (function() {
 
     form_data.append("url", url);
 
-    // TODO: cannot deal with error status e.g. 422 Unprocessable Entries
+    xhr.onload = function(e) {
+      // note: this === xhr
+      switch (this.status) {
+        case 201: // CREATED
+          callback({
+            "status": "OK",
+            "shortened_url": this.getResponseHeader("Location")
+          });
+          break;
 
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4) {
-        switch (xhr.status) {
-          case 201: // CREATED
-            callback({
-              "status": "OK",
-              "shortened_url": xhr.getResponseHeader("Location")
-            });
-            break;
-
-          default: // Something Went Wrong!
-            callback({
-              "status": "Error",
-              "error": {
-                "code": xhr.status
-              }
-            });
-            break;
-        }
+        default: // Something Went Wrong!
+          callback({
+            "status": "Error",
+            "error": {
+              "code": this.status,
+              "message": this.responseText
+            }
+          });
+          break;
       }
     };
 
