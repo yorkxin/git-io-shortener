@@ -54,7 +54,7 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
 
 // show Page Action icon when we're on GitHub
 chrome.tabs.onUpdated.addListener(function(tab_id, change_info, tab) {
-  if (tab.url.match('^https:\/\/github.com')) {
+  if (tab.url.match('^https:\/\/(gist\.)?github.com')) {
     chrome.pageAction.show(tab_id);
   }
 });
