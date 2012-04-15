@@ -16,11 +16,19 @@ var GitIOPopup = new (function() {
       };
 
       chrome.extension.sendRequest(request_data, function(data) {
-        if (data.status === "OK") {
-          setTextField(data.shortened_url);
-          setMessage("Generated. Click to copy.");
-        } else {
-          setMessage(data.error.message);
+        switch (data.status) {
+          case "OK":
+            setTextField(data.shortened_url);
+            setMessage("Generated. Click to copy.");
+            break;
+
+          case "Error":
+            setMessage("Error: (" + data.error.code + ") " + data.error.message);
+            break;
+
+          default:
+            setMessage("Unknown Response: " + data.status);
+            break;
         }
       });
     });
@@ -54,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
   GitIOPopup.getShortenedUrl();
 });
 
+// hook this after successfully generated
 // copy the result to clipboard when click on #result or #shortened-url
 document.getElementById("shortened-url").addEventListener("click", function() {
   GitIOPopup.copyResultToClipboard();
