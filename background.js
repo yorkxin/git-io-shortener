@@ -54,7 +54,9 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
 
 // show Page Action icon when we're on GitHub
 chrome.tabs.onUpdated.addListener(function(tab_id, change_info, tab) {
-  if (tab.url.match('^https:\/\/(gist\.)?github.com')) {
+  // we can get this regular expression
+  // by sending url=http://help.github.com and see the response body
+  if (tab.url.match(/^https?:\/\/((gist|raw|develop(er)?)\.)?github\.com\//)) {
     chrome.pageAction.show(tab_id);
   }
 });
