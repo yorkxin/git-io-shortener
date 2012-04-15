@@ -20,6 +20,7 @@ var GitIOPopup = new (function() {
           case "OK":
             setTextField(data.shortened_url);
             setMessage("Generated. Click to copy.");
+            bindClickToCoopy();
             break;
 
           case "Error":
@@ -34,7 +35,7 @@ var GitIOPopup = new (function() {
     });
   };
 
-  this.copyResultToClipboard = function() {
+  var copyResultToClipboard = function() {
     if (getTextField() === "") {
       setMessage("Not yet generated...");
     } else {
@@ -56,14 +57,15 @@ var GitIOPopup = new (function() {
   var setMessage = function(message) {
     message_container.innerText = message;
   };
+
+  var bindClickToCoopy = function() {
+    // copy the result to clipboard when click on #result or #shortened-url
+    text_field.addEventListener("click", function() {
+      copyResultToClipboard();
+    });
+  };
 })();
 
 document.addEventListener("DOMContentLoaded", function () {
   GitIOPopup.getShortenedUrl();
-});
-
-// hook this after successfully generated
-// copy the result to clipboard when click on #result or #shortened-url
-document.getElementById("shortened-url").addEventListener("click", function() {
-  GitIOPopup.copyResultToClipboard();
 });
