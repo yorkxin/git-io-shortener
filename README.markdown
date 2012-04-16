@@ -19,6 +19,10 @@ It's welcomed!  You may help me by:
 * making a fancy new icon, or
 * fixing bugs (see Issues section)
 
+## Technical Notes
+
+I've wrote an article about some technical things I learned when making this extension, [read it here](http://blog.yorkxin.org/2012/04/15/git-io-url-shortener/).
+
 ## Changelog
 
 ### v0.4.0:
