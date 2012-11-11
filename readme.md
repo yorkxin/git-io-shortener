@@ -2,15 +2,18 @@
 
 Did you ever feel annoying when shortening a GitHub URL [with Git.io](http://git.io/help), by typing `curl -i` manually?  Let's do it within our browser!
 
+
 ## Demo: Click the Icon, and You'll See it
 
 When you visiting a GitHub.com page, click the **git.io** button, and a shortened URL will be popped out:
 
 [![Git.io URL Shortener Demo](http://cl.ly/462O1f1r2n0H1j0I0b00/Git.io%20URL%20Shortener%20Demo.png)](http://cl.ly/462O1f1r2n0H1j0I0b00)
 
+
 ## Copy to your Clipboard: Just One More Click Away
 
 You can also click on the shortened URL, and it will be copied to your clipboard!
+
 
 ## Wanna Help Me?
 
@@ -19,9 +22,11 @@ It's welcomed!  You may help me by:
 * making a fancy new icon, or
 * fixing bugs (see Issues section)
 
+
 ## Technical Notes
 
 I've wrote an article about some technical things I learned when making this extension, [read it here](http://blog.yorkxin.org/2012/04/15/git-io-url-shortener/).
+
 
 ## Changelog
 
@@ -42,6 +47,7 @@ I've wrote an article about some technical things I learned when making this ext
 
 - Shorten github.com with git.io service
 - Click the result text box to copy to clipboard
+
 
 ## License: Know your rights
 
