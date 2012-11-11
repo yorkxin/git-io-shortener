@@ -8,12 +8,10 @@
     "http://git.io/"
   ],
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+    "128": "icon.png"
   },
   "page_action": {
-    "default_icon": "icon16.png",
+    "default_icon": "icon.png",
     "default_title": "Generate Git.io Short URL",
     "default_popup": "popup.html"
   },
