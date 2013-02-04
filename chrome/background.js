@@ -51,6 +51,23 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
 
 chrome.tabs.onUpdated.addListener(function (tab_id, change_info, tab) {
   if (tab.url.match(/^(http|https)?:\/\/(.+\.)?github\.com\//)) {
-    chrome.browserAction.show(tab_id)
+    chrome.pageAction.show(tab_id)
   }
+})
+
+chrome.storage.local.get('notFirstRun', function (arr) {
+  if (arr['notFirstRun']) return
+  var shrtList = {
+      'http://git.io/help': 'https://github.com/blog/985-git-io-github-url-shortener'
+    , 'http://git.io/nn': 'https://github.com/noformnocontent'
+    , 'http://git.io/chrome': 'https://github.com/noformnocontent/git-io-chrome'
+    }
+
+  for (var k in shrtList) {
+    var urlPair = {}
+    urlPair[k] = shrtList[k]
+    chrome.storage.local.set(urlPair)
+  }
+
+  chrome.storage.local.set({'notFirstRun': true})
 })

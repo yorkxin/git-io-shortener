@@ -10,13 +10,12 @@ var text_field = document.getElementById('shortened-url')
 
 action_button.addEventListener('click', shrtLink)
 
-var getTextField = function () {
-  return text_field.value
-}
+chrome.storage.local.get(function (arr) {
+  for (var k in arr) {
+    createShrtListElement(k, arr[k])
+  }
+})
 
-var setTextField = function (text) {
-  text_field.value = text
-}
 
 var setMessage = function (message) {
   message_field.innerHTML = message
@@ -41,7 +40,8 @@ var bindBtnToCoopy = function () {
   setMessage('You can now copy the link by clicking “cpy!” It will also stay in your shrt-list if you ever need it again.')
 }
 
-var createShrtLink = function (shrt, fullUrl) {
+var createShrtListElement = function (shrt, fullUrl, flashListsElement) {
+  if (!/^http:\/\/git\.io.+/.test(shrt)) return
   var listElement = document.createElement('li')
     , listInput = document.createElement('input')
     , listVisit = document.createElement('a')
@@ -68,8 +68,11 @@ var createShrtLink = function (shrt, fullUrl) {
   listElement.appendChild(listInput)
   listElement.appendChild(listVisit)
   listElement.appendChild(listCopy)
+  if (flashListsElement) listElement.classList.add('current')
 
-  recent_links.appendChild(listElement, recent_links.firstChild)
+  recent_links.insertBefore(listElement, recent_links.firstChild)
+  
+  testShrtListLength()
 }
 
 var getShortenedUrl = function () {
@@ -87,13 +90,16 @@ var getShortenedUrl = function () {
     chrome.extension.sendRequest(request_data, function (data) {
       switch (data.status) {
         case 'OK':
-          setTextField(data.shortened_url)
+          text_field.value = data.shortened_url
           bindBtnToCoopy()
           chrome.storage.local.get(data.shortened_url, function (arr) {
             if (!arr[data.shortened_url]) {
               var urlPair = {}
               urlPair[data.shortened_url] = tab.url
               chrome.storage.local.set(urlPair)
+            }
+            else {
+              // bump to the top and '.current' the one in the list
             }
           })
           break
@@ -120,15 +126,7 @@ var getShortenedUrl = function () {
   })
 }
 
-
-chrome.storage.onChanged.addListener(function (changes, namespace) {
-  for (key in changes) {
-    var storageChange = changes[key]
-    console.log('Storage key "%s" in namespace "%s" changed. Old value was "%s", new value is "%s".',
-                 key, namespace, storageChange.oldValue, storageChange.newValue)
-    createShrtLink(key, changes[key])
-  }
-
+var testShrtListLength = function () {
   if (lis.length > 3) {
     show_all_recent_links.style.display = 'block'
     show_all_recent_links.getElementsByTagName('li')[0].innerHTML = '▾ show ' + (lis.length-3) + ' more ▾'
@@ -139,9 +137,15 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
       clear_list.addEventListener('click', function () {
         while (lis[0]) { lis[0].parentNode.removeChild(lis[0]) }
         chrome.storage.local.clear()
+        chrome.storage.local.set({'notFirstRun': true})
         clear_list.style.display = 'none'
       })
     })
   }
+}
 
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+  for (key in changes) {
+    if (changes[key].newValue) createShrtListElement(key, changes[key], true)
+  }
 })

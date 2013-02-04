@@ -18,7 +18,7 @@ Forgot to paste it where you wanted and already copied some other text?
 
 ### Screenshot
 
-![git-io-chrome screenshot](https://raw.github.com/noformnocontent/git-io-chrome/master/screenshot.jpg)
+![git-io-chrome screenshot](https://raw.github.com/noformnocontent/git-io-chrome/master/screenshot.png)
 
 
 ## Licenses
