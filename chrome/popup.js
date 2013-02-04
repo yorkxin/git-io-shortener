@@ -94,7 +94,7 @@ var getShortenedUrl = function () {
               chrome.storage.local.set(
                 {data.shortened_url:
                  tab.url})
-          }
+          })
           break
 
         case 'Error':
