@@ -6,7 +6,7 @@ var text_field = document.getElementById('shortened-url')
   , clear_list = document.getElementById('clear-list')
   , recent_links = document.getElementById('recent-links')
   , lis = recent_links.getElementsByTagName('li')
-  , shrtLink = function () { GitIOPopup.getShortenedUrl() }
+  , shrtLink = function () { getShortenedUrl() }
 
 action_button.addEventListener('click', shrtLink)
 
@@ -90,10 +90,11 @@ var getShortenedUrl = function () {
           setTextField(data.shortened_url)
           bindBtnToCoopy()
           chrome.storage.local.get(data.shortened_url, function (arr) {
-            if (!arr[data.shortened_url]) 
+            if (!arr[data.shortened_url]) {
               chrome.storage.local.set(
                 {data.shortened_url:
                  tab.url})
+            }
           })
           break
 
