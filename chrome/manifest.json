@@ -1,0 +1,20 @@
+{ "name": "Git.io for Chrome"
+, "version": "0.5.0"
+, "manifest_version": 2
+, "description": "A Google Chrome extension for shortening Github URLs with git.io"
+, "homepage_url": "http://git.io/chrome"
+, "permissions": [ "tabs", "storage", "http://git.io/" ]
+, "icons": {
+    "16":"icon_small.png"
+  , "128": "icon.png"
+  }
+, "page_action": {
+    "default_icon": "icon_small.png"
+  , "default_title": "Git.io for Chrome"
+  , "default_popup": "popup.html"
+  }
+, "background": {
+    "scripts": ["background.js"]
+  }
+}
+

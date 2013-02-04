@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head><title>Git.io for Chrome</title>
+<style type="text/css">
+* {  
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+}
+@font-face{
+  font-family:'Octicons Regular';
+  src: url('octicons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: sans-serif;
+  font-size: 0;
+  background: #e7eef1;
+  padding: 15px;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+#git-io-label {
+  font-size: 14px;
+  background: -webkit-linear-gradient(#839ba9, #415b6b);
+  background: linear-gradient(#839ba9, #415b6b);
+  border-radius: 3px 0 0 3px;
+  border-top: solid 1px #313b3d;
+  border-left: solid 1px #232b2c;
+  border-bottom: solid 1px #232b2c;
+  border-right: solid 1px #232b2c;
+  box-shadow: 0 1px 3px #6a8290 inset;
+  vertical-align: top;
+  color: #e7eef1;
+  padding: 5px 7px;
+  height: 17px;
+  display: inline-block;
+  letter-spacing: .5pt;
+  width: 37px;
+  text-align: center;
+}
+form { display: inline }
+::-webkit-input-placeholder { color: #b3bbbe }
+::input-placeholder { color: #b3bbbe }
+#shortened-url {
+  background: #f7f9fa;
+  font-size: 14px;
+  color: #3b4448;
+  border-top: solid 1px #49565e;
+  border-right: 0;
+  border-bottom: solid 1px #37434c;
+  border-left: 0;
+  box-shadow: 0 1px 3px #6a8290 inset;
+  vertical-align: top;
+  padding: 3px 5px;
+  height: 21px;
+  width: 144px;
+}
+button {
+  width: 49px;
+  height: 29px;
+  font-size: 14px;
+  line-height: 12px;
+  background: -webkit-linear-gradient(#425B6B, #24323B);
+  background: linear-gradient(#425B6B, #24323B);
+  border-radius: 0 3px 3px 0;
+  border-top: solid 1px #313b3d;
+  border-left: solid 1px #232b2c;
+  border-bottom: solid 1px #232b2c;
+  border-right: solid 1px #232b2c;
+  box-shadow: 0 1px 0 #5f7886 inset;
+  vertical-align: top;
+  color: #fff;
+  padding: 5px 7px;
+}
+button.done {
+  background: -webkit-linear-gradient(#52a360, #477651);
+  background: linear-gradient(#52a360, #477651);
+}
+button.error {
+  background: -webkit-linear-gradient(#b24142, #803b3d);
+  background: linear-gradient(#b24142, #803b3d);
+}
+ul {
+  width: 255px;
+  font-size: 14px;
+  list-style: none;
+  margin-top: 15px;
+}
+ul li {
+  border: solid 1px #839ba9;
+  border-top: 0;
+  background: #e7eef1;
+  text-align: center;
+  padding: 7px 5px;
+}
+ul li:first-child { 
+  border-top: solid 1px #839ba9;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+ul li:last-child {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+#recent-links li {
+  display: none;
+  padding: 0;
+  text-align: right;
+  font-size: 0;
+}
+#recent-links li:hover { background: #f7f9fa }
+#recent-links li input {
+  float: left;
+  font-size: 12px;
+  width: 158px;
+  padding: 2px;
+  background: none;
+  border: 0;
+  text-overflow: ellipsis;
+  color: #839ba9;
+  margin: 5px 5px;
+}
+#recent-links li:hover input { color: #3b4448 }
+#recent-links li a {
+  font-family: 'Octicons Regular';
+  visibility: hidden;
+  text-decoration: none;
+  text-align: center;
+  padding: 3px;
+  display: inline-block;
+  color: #3b4448;
+  font-size: 16px;
+  height: 24px;
+  width: 24px;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  line-height: 1.5em;
+}
+#recent-links li:hover a { visibility: visible }
+#recent-links li a:hover, #recent-links li a:active, #recent-links li a:focus {
+  background-image: -webkit-linear-gradient(#5899cc, #3173b4);
+  background-image: linear-gradient(#5899cc, #3173b4);
+  color: #fff;
+}
+section {
+  box-shadow: 1px 1px 2px #6a8290;
+  border-radius: 3px;
+  width: 255px;
+}
+#recent-links li:first-child, #recent-links li:nth-child(2), #recent-links li:nth-child(3) { display: block }
+#show-all-recent-links, #clear-list {
+  color: #839ba9;
+  display: none;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 0;
+}
+#show-all-recent-links li {
+  color: #839ba9;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0;
+}
+#show-all-recent-links:hover li {
+  background: #f7f9fa;
+  color: #3b4448;
+}
+#clear-list { margin-top: 15px; }
+#clear-list:hover li {
+  background-color: #fee1e5;
+  color: #3b4448;
+}
+
+#notifications li {
+  font-size: 11px;
+  text-overflow: ellipsis;
+  word-break: normal;
+  white-space: normal;
+  -webkit-transition-property: background-color;
+  -webkit-transition-duration: 0.3s;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  background-color: #f7f9fa;
+}
+#notifications.done li, #recent-links li.current { background-color: #e5fae6 }
+#notifications.error li { background-color: #fee1e5 }
+</style>
+
+<script src="popup.js" defer></script>
+
+</head>
+<body>
+
+  <section>
+    <span id="git-io-label">git.io/</span>
+    <input id="shortened-url" type="text" placeholder="(custom url)">
+    <button id="action-button">shrt!</button>
+  </section>
+
+  <ul id="notifications">
+    <li><span id="message">Enter the shortener (optional) and click “shrt!”<span></li>
+  </ul>
+
+  <ul id="recent-links">
+
+    <li title="https://github.com/noformnocontent/git-io-chrome"><input type="text" value="http://git.io/chrome" readonly> <a target="_new" title="Open link in new tab" href="http://git.io/chrome"></a> <a href="#copy" title="Copy link to clipboard" class="copyBtn"></a>
+    <li title="https://github.com/noformnocontent"><input type="text" value="http://git.io/nn" readonly> <a target="_new" title="Open link in new tab" href="http://git.io/nn"></a> <a href="#copy" title="Copy link to clipboard" class="copyBtn"></a>
+    <li title="https://github.com/blog/985-git-io-github-url-shortener"><input type="text" value="http://git.io/help" readonly> <a target="_new" title="Open link in new tab" href="http://git.io/help"></a> <a href="#copy" title="Copy link to clipboard" class="copyBtn"></a>
+
+  </ul>
+
+  <ul id="show-all-recent-links" title="Show all recent links">
+    <li></li>
+  </ul>
+
+  <ul id="clear-list" title="Clear the list">
+    <li>clear list</li>
+  </ul>
+
+</body>
+</html>
