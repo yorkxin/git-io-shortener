@@ -91,9 +91,9 @@ var getShortenedUrl = function () {
           bindBtnToCoopy()
           chrome.storage.local.get(data.shortened_url, function (arr) {
             if (!arr[data.shortened_url]) {
-              chrome.storage.local.set(
-                {data.shortened_url:
-                 tab.url})
+              var urlPair = {}
+              urlPair[data.shortened_url] = tab.url
+              chrome.storage.local.set(urlPair)
             }
           })
           break
