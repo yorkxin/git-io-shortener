@@ -51,6 +51,6 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
 
 chrome.tabs.onUpdated.addListener(function (tab_id, change_info, tab) {
   if (tab.url.match(/^(http|https)?:\/\/(.+\.)?github\.com\//)) {
-    chrome.pageAction.show(tab_id)
+    chrome.browserAction.show(tab_id)
   }
 })
