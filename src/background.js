@@ -54,7 +54,7 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
 chrome.tabs.onUpdated.addListener(function(tab_id, change_info, tab) {
   // we can get this regular expression
   // by sending url=http://help.github.com and see the response body
-  if (tab.url.match(/^https?:\/\/((gist|raw|develop(er)?)\.)?github\.com\//)) {
+  if (tab.url.match(/^https?:\/\/((help|gist|raw|develop(er)?)\.)?github\.com\//)) {
     chrome.pageAction.show(tab_id);
   }
 });
