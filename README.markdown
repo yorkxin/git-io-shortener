@@ -25,6 +25,10 @@ I've wrote an article about some technical things I learned when making this ext
 
 ## Changelog
 
+### v0.5.0:
+
+- Support help.github.com. Thanks to @jzjzjzj
+
 ### v0.4.0:
 
 - Deal with error status from git.io
