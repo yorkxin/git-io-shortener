@@ -5,9 +5,7 @@ var GitIO = new (function() {
   this.invoke = function(command, params, response_callback) {
     switch (command) {
       case "generate":
-        requestForShortenUrl(params.url, function(data) {
-          response_callback(data);
-        });
+        requestForShortenUrl(params.url, response_callback);
         break;
     }
   };
