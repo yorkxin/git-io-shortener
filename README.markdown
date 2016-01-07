@@ -25,6 +25,11 @@ I've wrote an article about some technical things I learned when making this ext
 
 ## Changelog
 
+### v0.5.1:
+
+- Support `*.github.com`, `*.github.io` and `*.githubusercontent.com`.
+- Switched to https://git.io
+
 ### v0.5.0:
 
 - Support help.github.com. Thanks to @jzjzjzj
