@@ -1,6 +1,17 @@
 var GitIO = new (function() {
 
   var API_ENDPOINT  = "http://git.io/";
+  var DOMAINS = [
+    "github.com",
+    "github.io",
+    "githubusercontent.com"
+  ];
+
+  var DOMAINS_EXPRESSION = DOMAINS.map(function(domain) {
+    return domain.replace('.', '\\.');
+  }).join("|");
+
+  var MATCH_DOMAINS = new RegExp(`(^|\\.)(${DOMAINS_EXPRESSION})$`, "i");
 
   this.invoke = function(command, params, response_callback) {
     switch (command) {
@@ -10,6 +21,11 @@ var GitIO = new (function() {
         });
         break;
     }
+  };
+
+  this.isGitHubURL = function(url) {
+    var url = new URL(url);
+    return MATCH_DOMAINS.test(url.host);
   };
 
   var requestForShortenUrl = function(url, callback) {
@@ -52,9 +68,7 @@ chrome.extension.onRequest.addListener(function (request, sender, sendResponse) 
 
 // show Page Action icon when we're on GitHub
 chrome.tabs.onUpdated.addListener(function(tab_id, change_info, tab) {
-  // we can get this regular expression
-  // by sending url=http://help.github.com and see the response body
-  if (tab.url.match(/^https?:\/\/((help|gist|raw|develop(er)?)\.)?github\.com\//)) {
+  if (GitIO.isGitHubURL(tab.url)) {
     chrome.pageAction.show(tab_id);
   }
 });
