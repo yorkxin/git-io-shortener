@@ -1,6 +1,6 @@
 var GitIO = new (function() {
 
-  var API_ENDPOINT  = "http://git.io/";
+  var API_ENDPOINT  = "https://git.io/";
   var DOMAINS = [
     "github.com",
     "github.io",
