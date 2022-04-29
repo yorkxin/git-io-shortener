@@ -1,6 +1,10 @@
+# DEPRECATED
+
+As of January 2022, [GitHub put `git.io` service to read-only](https://github.blog/changelog/2022-04-25-git-io-deprecation/). Therefore, this extension no longer work.
+
 # Git.io URL Shortener (Chrome Extension)
 
-Did you ever feel annoying when shortening a GitHub URL [with Git.io](http://git.io/help), by typing `curl -i` manually?  Let's do it within our browser!
+Did you ever feel annoying when shortening a GitHub URL with Git.io, by typing `curl -i` manually?  Let's do it within our browser!
 
 ## Demo: Click the Icon, and You'll See it
 
